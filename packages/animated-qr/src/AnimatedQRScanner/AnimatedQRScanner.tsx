@@ -4,8 +4,6 @@ import { CameraStatus, ScannerProps } from "./types";
 import { getAnimatedScan } from "./getAnimatedScan";
 import { useCamera } from "./useCamera";
 
-export const CAMERA_VIDEO_WIDTH = 300;
-
 export const AnimatedQRScanner = ({
   purpose,
   handleScan,
@@ -37,13 +35,13 @@ export const AnimatedQRScanner = ({
   }, [cameraStatus]);
 
   return (
-    <div style={{ width: options?.width || CAMERA_VIDEO_WIDTH }}>
-      <BaseQRScanner
-        handleScan={handleScanSuccess}
-        handleError={handleScanFailure}
-        blur={options?.blur}
-        videoLoaded={videoLoaded}
-      />
-    </div>
+    <BaseQRScanner
+      handleScan={handleScanSuccess}
+      handleError={handleScanFailure}
+      width={options?.width}
+      height={options?.height}
+      blur={options?.blur}
+      videoLoaded={videoLoaded}
+    />
   );
 };

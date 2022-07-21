@@ -12,19 +12,22 @@ export enum CameraStatus {
 }
 
 export interface ScannerProps {
-  purpose: Purpose;
-  handleScan: (ur: { type: string; cbor: string }) => void;
-  handleError: (error: string) => void;
+  purpose: Purpose
+  handleScan: (ur: { type: string; cbor: string }) => void
+  handleError: (error: string) => void
   options?: {
-    width?: number;
-    blur?: boolean;
-  };
+    width?: number | string
+    height?: number | string
+    blur?: boolean
+  }
   videoLoaded?: (canPlay: boolean) => void
 }
 
 export enum Purpose {
   SYNC = "sync",
   SIGN = "sign",
-  SOL_SYNC = 'sol-sync',
-  SOL_SIGN = 'sol-sign'
+  SOL_SYNC = "sol-sync",
+  SOL_SIGN = "sol-sign",
+  NEAR_SYNC = "near-sync",
+  NEAR_SIGN = "near-sign",
 }

@@ -17,7 +17,9 @@ export const BaseQRCode = ({
       width: size,
       height: size,
       backgroundColor: "white",
-      padding: 5,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
     }}
   >
     <QRCode value={value} size={size - 10} />
