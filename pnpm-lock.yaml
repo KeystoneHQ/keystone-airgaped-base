@@ -263,9 +263,6 @@ importers:
       '@keystonehq/sdk':
         specifier: ^0.19.2
         version: link:../sdk
-      '@metamask/obs-store':
-        specifier: ^7.0.0
-        version: 7.0.0
       bs58check:
         specifier: ^2.1.2
         version: 2.1.2
@@ -3342,14 +3339,6 @@ packages:
   /@ledgerhq/logs@4.72.0:
     resolution: {integrity: sha512-o+TYF8vBcyySRsb2kqBDv/KMeme8a2nwWoG+lAWzbDmWfb2/MrVWYCVYDYvjXdSoI/Cujqy1i0gIDrkdxa9chA==}
     requiresBuild: true
-    dev: false
-
-  /@metamask/obs-store@7.0.0:
-    resolution: {integrity: sha512-Tr61Uu9CGXkCg5CZwOYRMQERd+y6fbtrtLd/PzDTPHO5UJpmSbU+7MPcQK7d1DwZCOCeCIvhmZSUCvYliC8uGw==}
-    engines: {node: '>=12.0.0'}
-    dependencies:
-      '@metamask/safe-event-emitter': 2.0.0
-      through2: 2.0.5
     dev: false
 
   /@metamask/obs-store@9.0.0:

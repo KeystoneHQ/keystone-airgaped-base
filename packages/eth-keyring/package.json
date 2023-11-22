@@ -21,7 +21,6 @@
     "@keystonehq/base-eth-keyring": "^0.14.1",
     "@keystonehq/bc-ur-registry-eth": "^0.19.1",
     "@keystonehq/sdk": "^0.19.2",
-    "@metamask/obs-store": "^7.0.0",
     "bs58check": "^2.1.2",
     "ethereumjs-util": "^7.0.8",
     "hdkey": "^2.0.1",
