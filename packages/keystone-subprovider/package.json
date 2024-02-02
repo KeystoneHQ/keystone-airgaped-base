@@ -34,7 +34,7 @@
     "testEnvironment": "node"
   },
   "dependencies": {
-    "@0x/subproviders": "^6.5.4",
+    "@0x/subproviders": "^8.0.1",
     "@ethereumjs/common": "^3.0.2",
     "@ethereumjs/rlp": "^4.0.1",
     "@ethereumjs/tx": "^4.0.2",
