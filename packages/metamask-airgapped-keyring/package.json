@@ -29,7 +29,7 @@
     "@ethereumjs/tx": "^4.0.2",
     "@keystonehq/base-eth-keyring": "^0.14.1",
     "@keystonehq/bc-ur-registry-eth": "^0.19.1",
-    "@metamask/obs-store": "^7.0.0",
+    "@metamask/obs-store": "^9.0.0",
     "rlp": "^2.2.6",
     "uuid": "^8.3.2"
   },
