@@ -8,5 +8,5 @@ patchTags(
     .map(rt => rt.getTag()) as number[]
 );
 
-export { TronSignRequest } from "./TronSignRequest";
+export { TronSignRequest, DataType } from "./TronSignRequest";
 export { TronSignature } from "./TronSignature";

@@ -4,6 +4,7 @@ import {
   TronSignRequest,
   CryptoKeypath,
   PathComponent,
+  DataType
 } from "../src";
 import * as uuid from "uuid";
 
@@ -30,6 +31,7 @@ describe("tron-sign-request", () => {
     const tronSignRequest = new TronSignRequest({
       requestId: Buffer.from(idBuffer),
       signData: tronData,
+      dataType: DataType.transaction,
       derivationPath: signKeyPath,
       address: "",
       origin: "tron wallet",
@@ -39,7 +41,7 @@ describe("tron-sign-request", () => {
     const ur = tronSignRequest.toUREncoder(1000).nextPart();
 
     expect(ur).toBe(
-      "ur:tron-sign-request/oxadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdtybkaoatmhcpayvyrhuegomtihswjsfzlassmsldrkdwhtpladayctbgptadbkehjykkjoihdmiojljliojzihhsjoinjkdmiajljndljojpjljyjliajljzdmghjpinioioihjpgujnhsjpjyfxjljtjyjphsiajybgjybkbzfpstneaahygtfdpmlgplaevaoljsgtplckaebkursnbgbzfpbtdtdwmkonwpnbjzcxlpzmytmunliecntkiysofrcpfyptahnsrkaeaeaeaeaeaeaeaeaeaeaeaendrfvwcxtalrsrrhhtttbnqzvldrmomwvaeolgotaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaebsfwfzjortrpvtltrkdwmhadlamwwmuoaxaxtaaddyoeadlocsdwykcssrykaeykaeykaocybgbgbgbgahjejyjpjljtcxkthsjzjzihjymwlrhkst"
+      "ur:tron-sign-request/onadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdtybkaoatmhcpayvyrhuegomtihswjsfzlassmsldrkdwhtpladayctbgptadbkehjykkjoihdmiojljliojzihhsjoinjkdmiajljndljojpjljyjliajljzdmghjpinioioihjpgujnhsjpjyfxjljtjyjphsiajybgjybkbzfpstneaahygtfdpmlgplaevaoljsgtplckaebkursnbgbzfpbtdtdwmkonwpnbjzcxlpzmytmunliecntkiysofrcpfyptahnsrkaeaeaeaeaeaeaeaeaeaeaeaendrfvwcxtalrsrrhhtttbnqzvldrmomwvaeolgotaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaebsfwfzjortrpvtltrkdwmhadlamwwmuoaxaxadaataaddyoeadlocsdwykcssrykaeykaeykaocybgbgbgbgamjejyjpjljtcxkthsjzjzihjyjtrnneiy"
     );
     const tronSignRequestDecoded = TronSignRequest.fromCBOR(
       Buffer.from(cborHex, "hex")
@@ -48,6 +50,7 @@ describe("tron-sign-request", () => {
       tronRequestId
     );
     expect(tronSignRequest.getOrigin()).toBe("tron wallet");
+    expect(tronSignRequestDecoded.getDataType()).toBe(1);
     expect(tronSignRequestDecoded.getSignData().toString("hex")).toEqual(
       "0a0207902208e1b9de559665c6714080c49789bb2c5aae01081f12a9010a31747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e54726967676572536d617274436f6e747261637412740a1541c79f045e4d48ad8dae00e6a6714dae1e000adfcd1215410d292c98a5eca06c2085fff993996423cf66c93b2244a9059cbb0000000000000000000000009bbce520d984c3b95ad10cb4e32a9294e6338da300000000000000000000000000000000000000000000000000000000000f424070c0b6e087bb2c90018094ebdc03"
     );
@@ -68,6 +71,7 @@ describe("tron-sign-request", () => {
 
     const request = TronSignRequest.constructTronRequest(
       tronData,
+      DataType.transaction,
       derivationHdPath,
       xfp,
       requestID,
@@ -76,7 +80,7 @@ describe("tron-sign-request", () => {
     );
     const ur = request.toUREncoder(1000).nextPart();
     expect(ur).toBe(
-      "ur:tron-sign-request/oxadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdtybkaoatmhcpayvyrhuegomtihswjsfzlassmsldrkdwhtpladayctbgptadbkehjykkjoihdmiojljliojzihhsjoinjkdmiajljndljojpjljyjliajljzdmghjpinioioihjpgujnhsjpjyfxjljtjyjphsiajybgjybkbzfpstneaahygtfdpmlgplaevaoljsgtplckaebkursnbgbzfpbtdtdwmkonwpnbjzcxlpzmytmunliecntkiysofrcpfyptahnsrkaeaeaeaeaeaeaeaeaeaeaeaendrfvwcxtalrsrrhhtttbnqzvldrmomwvaeolgotaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaebsfwfzjortrpvtltrkdwmhadlamwwmuoaxaxtaaddyoeadlocsdwykcssrykaeykaeykaocybgbgbgbgahjejyjpjljtcxkthsjzjzihjymwlrhkst"
+      "ur:tron-sign-request/onadtpdagdndcawmgtfrkigrpmndutdnbtkgfssbjnaohdtybkaoatmhcpayvyrhuegomtihswjsfzlassmsldrkdwhtpladayctbgptadbkehjykkjoihdmiojljliojzihhsjoinjkdmiajljndljojpjljyjliajljzdmghjpinioioihjpgujnhsjpjyfxjljtjyjphsiajybgjybkbzfpstneaahygtfdpmlgplaevaoljsgtplckaebkursnbgbzfpbtdtdwmkonwpnbjzcxlpzmytmunliecntkiysofrcpfyptahnsrkaeaeaeaeaeaeaeaeaeaeaeaendrfvwcxtalrsrrhhtttbnqzvldrmomwvaeolgotaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaebsfwfzjortrpvtltrkdwmhadlamwwmuoaxaxadaataaddyoeadlocsdwykcssrykaeykaeykaocybgbgbgbgamjejyjpjljtcxkthsjzjzihjyjtrnneiy"
     );
   });
 });
