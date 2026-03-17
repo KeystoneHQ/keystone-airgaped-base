@@ -14,14 +14,21 @@ const { decodeToDataItem, RegistryTypes } = extend;
 enum Keys {
   requestId = 1,
   signData,
+  dataType,
   derivationPath,
   address,
   origin,
 }
 
+export enum DataType {
+  transaction = 1,
+  personalMessage = 2,
+}
+
 type SignRequestProps = {
   requestId?: Buffer;
   signData: Buffer;
+  dataType: DataType;
   derivationPath: CryptoKeypath;
   address?: Buffer;
   origin?: string;
@@ -30,6 +37,7 @@ type SignRequestProps = {
 export class TronSignRequest extends RegistryItem {
   private requestId?: Buffer;
   private signData: Buffer;
+  private dataType: DataType;
   private derivationPath: CryptoKeypath;
   private address?: Buffer;
   private origin?: string;
@@ -40,6 +48,7 @@ export class TronSignRequest extends RegistryItem {
     super();
     this.requestId = args.requestId;
     this.signData = args.signData;
+    this.dataType = args.dataType;
     this.derivationPath = args.derivationPath;
     this.address = args.address;
     this.origin = args.origin;
@@ -47,13 +56,15 @@ export class TronSignRequest extends RegistryItem {
 
   public getRequestId = () => this.requestId;
   public getSignData = () => this.signData;
-  public getDerivationPath= () => this.derivationPath.getPath();
+  public getDataType = () => this.dataType;
+  public getDerivationPath = () => this.derivationPath.getPath();
   public getAddress = () => this.address;
   public getOrigin = () => this.origin;
 
   public toDataItem = () => {
     const map: DataItemMap = {};
     map[Keys.signData] = this.signData;
+    map[Keys.dataType] = this.dataType;
 
     const derivationPath = this.derivationPath.toDataItem();
     derivationPath.setTag(this.derivationPath.getRegistryType().getTag());
@@ -87,6 +98,7 @@ export class TronSignRequest extends RegistryItem {
     return new TronSignRequest({
       requestId,
       signData: map[Keys.signData],
+      dataType: map[Keys.dataType],
       derivationPath: CryptoKeypath.fromDataItem(map[Keys.derivationPath]),
       address: map[Keys.address],
       origin: map[Keys.origin],
@@ -113,7 +125,8 @@ export class TronSignRequest extends RegistryItem {
 
   public static constructTronRequest(
     signData: Buffer,
-    derivationHDPath: string,  
+    dataType: DataType,
+    derivationHDPath: string,
     xfp: string,
     uuidString?: string,
     address?: Buffer,
@@ -122,9 +135,11 @@ export class TronSignRequest extends RegistryItem {
     return new TronSignRequest({
       requestId: uuidString ? Buffer.from(uuidParse(uuidString) as Uint8Array) : undefined,
       signData,
+      dataType,
       derivationPath: TronSignRequest.parsePath(derivationHDPath, xfp),
       address,
       origin,
     });
   }
 }
+
